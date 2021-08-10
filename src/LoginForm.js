@@ -1,87 +1,144 @@
-import './loginForm.css';
+import "./loginForm.css";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { TextField, Button } from "@material-ui/core";
 
 function LoginForm() {
   //Static Variables
-  const EMAIL_MATCH = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm;
-  const PHONENUMBER_MATCH = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/gm;
+  const EMAIL_MATCH =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gim;
+  const PHONENUMBER_MATCH =
+    /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/gm;
   const MINIMUM_NAME_LENGTH = 2;
   const MINIMUM_PASSWORD_LENGTH = 8;
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const history = useHistory();
+
   const onSubmit = (data) => {
     console.log(data);
     history.push("/success");
-  }
-  // console.log(watch("password"))
+  };
 
   return (
-    <div className="loginForm">
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="first-name" className="first-name" >
-            First Name
-            <input 
-                id="first-name"
-                placeholder="First Name" 
-                {...register("first-name", { required: "First name required", minLength: {value: MINIMUM_NAME_LENGTH, message: "First name must be at least 2 characters"}})}                      
-            />
-            {errors["first-name"] && <p>{errors["first-name"].message}</p>}
-        </label>
-        <label htmlFor="last-name" >  
-            Last Name
-            <input 
-                id="last-name"
-                placeholder="Last Name"
-                {...register("last-name", { required: "Last name required", minLength: {value: MINIMUM_NAME_LENGTH, message: "Last name must be at least 2 characters"}})}
-            />
-            {errors["last-name"] && <p>{errors["last-name"].message}</p>}
-        </label>
-        <label htmlFor="email-address" >
-            Email Address
-            <input 
-                id="email-address"
-                placeholder="Email Address"
-                {...register("email-address", { required: "Email address required", pattern: {value: EMAIL_MATCH, message: "Must enter a valid email address"}})}
-            />
-            {errors["email-address"] && <p>{errors["email-address"].message}</p>}
-        </label>
-        <label htmlFor="password" >
-            Password
-            <input 
-                id="password"
-                placeholder="Password"
-                type="password"
-                {...register("password", { required: "Password required", minLength: {value: MINIMUM_PASSWORD_LENGTH, message: "Password must be at least 8 characters"}})}
-            />
-            {errors["password"] && <p>{errors["password"].message}</p>}
-        </label>
-        <label htmlFor="confirm-password" >  
-            Confirm Password
-            <input 
-                id="confirm-password"
-                placeholder="Confirm Password"
-                type="password"
-                {...register("confirm-password", { required: "Passwords must match", validate: value => value === watch("password")})}
-            />
-            {errors["confirm-password"] && <p>Passwords must match</p>}
-        </label>
-        <label htmlFor="phone-number" >
-            Phone Number (Optional)
-            <input 
-                id="phone-number"
-                placeholder="Phone Number"
-                {...register("phone-number", { pattern: {value: PHONENUMBER_MATCH, message: "Please enter a valid phone number"} })}
-            />
-            {errors["phone-numberemail-address"] && <p>{errors["phone-number"].message}</p>}
-        </label>
-        <div>
-            <button type="submit" >Submit</button>
-        </div>
+        {
+          //First Name
+        }
+        <TextField
+          id="standard-basic"
+          label="First Name"
+          helperText={
+            errors["first-name"] && <>{errors["first-name"].message}</>
+          }
+          {...register("first-name", {
+            required: "First name required",
+            minLength: {
+              value: MINIMUM_NAME_LENGTH,
+              message: "First name must be at least 2 characters",
+            },
+          })}
+        />
+
+        {
+          //Last Name
+        }
+        <TextField
+          id="standard-basic"
+          label="Last Name"
+          helperText={errors["last-name"] && <>{errors["last-name"].message}</>}
+          {...register("last-name", {
+            required: "Last name required",
+            minLength: {
+              value: MINIMUM_NAME_LENGTH,
+              message: "Last name must be at least 2 characters",
+            },
+          })}
+        />
+
+        {
+          //Email Address
+        }
+        <TextField
+          id="standard-basic"
+          label="Email Address"
+          helperText={
+            errors["email-address"] && <>{errors["email-address"].message}</>
+          }
+          {...register("email-address", {
+            required: "Email address required",
+            pattern: {
+              value: EMAIL_MATCH,
+              message: "Must enter a valid email address",
+            },
+          })}
+        />
+
+        {
+          //Password
+        }
+        <TextField
+          id="standard-password-input"
+          label="Password"
+          type="password"
+          helperText={errors["password"] && <>{errors["password"].message}</>}
+          {...register("password", {
+            required: "Password required",
+            minLength: {
+              value: MINIMUM_PASSWORD_LENGTH,
+              message: "Password must be at least 8 characters",
+            },
+          })}
+        />
+
+        {
+          //Confirm Password
+        }
+        <TextField
+          id="standard-password-input"
+          label="Confirm Password"
+          type="password"
+          helperText={errors["confirm-password"] && <>Passwords must match</>}
+          {...register("confirm-password", {
+            required: "Passwords must match",
+            validate: (value) => value === watch("password"),
+          })}
+        />
+
+        {
+          //Phone Number
+        }
+        <TextField
+          id="standard-basic"
+          label="Phone Number"
+          helperText={
+            errors["phone-numberemail-address"] && (
+              <>{errors["phone-number"].message}</>
+            )
+          }
+          {...register("phone-number", {
+            pattern: {
+              value: PHONENUMBER_MATCH,
+              message: "Please enter a valid phone number",
+            },
+          })}
+        />
+
+        {
+          //Submit
+        }
+        <Button variant="contained" type="submit">
+          Submit Form
+        </Button>
       </form>
-    </div>
+    </>
   );
 }
 

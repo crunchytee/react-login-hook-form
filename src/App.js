@@ -1,7 +1,7 @@
-import './App.css';
-import LoginForm from './LoginForm.js'
+import "./App.css";
+import LoginForm from "./LoginForm.js";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Success from './Success';
+import Success from "./Success";
 
 function App() {
   return (
@@ -14,7 +14,9 @@ function App() {
           <Route path="/success">
             <Success />
           </Route>
-          <Link to="/login" class="button">Show Form</Link>
+          <Link to="/login" class="button">
+            Show Form
+          </Link>
         </Switch>
       </Router>
     </div>
