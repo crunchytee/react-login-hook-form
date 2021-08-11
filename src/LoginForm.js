@@ -1,5 +1,5 @@
 import "./loginForm.css";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 
@@ -16,6 +16,7 @@ function LoginForm() {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -29,8 +30,37 @@ function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+
         {
-          //First Name
+            //test Controller
+        }
+        <Controller
+          control={control}
+          name="test"
+          render={({
+              field: { onChange, value },
+              fieldState: {},
+              formState: {},
+            }) => (
+                <TextField
+                id="standard-basic"
+                label="test input"
+                helperText={
+                    errors["test-input"] && <>{errors["test-input"].message}</>
+                }
+                {...register("test-input", {
+                    required: "First name required",
+                    minLength: {
+                        value: MINIMUM_NAME_LENGTH,
+                        message: "First name must be at least 2 characters",
+                    },
+                })}
+                />
+                )}
+                />
+
+        {
+            //First Name
         }
         <TextField
           id="standard-basic"
