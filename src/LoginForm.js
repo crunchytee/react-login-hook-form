@@ -1,5 +1,5 @@
 import "./loginForm.css";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 
@@ -13,10 +13,9 @@ function LoginForm() {
   const MINIMUM_PASSWORD_LENGTH = 8;
 
   const {
-    register,
     handleSubmit,
     watch,
-    formState: { errors },
+    control,
   } = useForm();
 
   const history = useHistory();
@@ -32,103 +31,144 @@ function LoginForm() {
         {
           //First Name
         }
-        <TextField
-          id="standard-basic"
-          label="First Name"
-          helperText={
-            errors["first-name"] && <>{errors["first-name"].message}</>
-          }
-          {...register("first-name", {
+        <Controller
+          control={control}
+          name="first-name"
+          rules={{
             required: "First name required",
             minLength: {
               value: MINIMUM_NAME_LENGTH,
               message: "First name must be at least 2 characters",
             },
-          })}
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-basic"
+              label="First Name"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
           //Last Name
         }
-        <TextField
-          id="standard-basic"
-          label="Last Name"
-          helperText={errors["last-name"] && <>{errors["last-name"].message}</>}
-          {...register("last-name", {
+        <Controller
+          control={control}
+          name="last-name"
+          rules={{
             required: "Last name required",
             minLength: {
               value: MINIMUM_NAME_LENGTH,
               message: "Last name must be at least 2 characters",
             },
-          })}
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-basic"
+              label="Last Name"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
           //Email Address
         }
-        <TextField
-          id="standard-basic"
-          label="Email Address"
-          helperText={
-            errors["email-address"] && <>{errors["email-address"].message}</>
-          }
-          {...register("email-address", {
+        <Controller
+          control={control}
+          name="email-address"
+          rules={{
             required: "Email address required",
             pattern: {
               value: EMAIL_MATCH,
               message: "Must enter a valid email address",
             },
-          })}
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-basic"
+              label="Email Address"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
           //Password
         }
-        <TextField
-          id="standard-password-input"
-          label="Password"
-          type="password"
-          helperText={errors["password"] && <>{errors["password"].message}</>}
-          {...register("password", {
+        <Controller
+          control={control}
+          name="password"
+          rules={{
             required: "Password required",
             minLength: {
               value: MINIMUM_PASSWORD_LENGTH,
               message: "Password must be at least 8 characters",
             },
-          })}
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-password-input"
+              label="Password"
+              type="password"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
           //Confirm Password
         }
-        <TextField
-          id="standard-password-input"
-          label="Confirm Password"
-          type="password"
-          helperText={errors["confirm-password"] && <>Passwords must match</>}
-          {...register("confirm-password", {
-            required: "Passwords must match",
-            validate: (value) => value === watch("password"),
-          })}
+        <Controller
+          control={control}
+          name="confirm-password"
+          rules={{
+            required: "Please enter a matching password",
+            validate: (value) =>
+              value === watch("password") || "Passwords must match",
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-password-input"
+              label="Confirm Password"
+              type="password"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
           //Phone Number
         }
-        <TextField
-          id="standard-basic"
-          label="Phone Number"
-          helperText={
-            errors["phone-numberemail-address"] && (
-              <>{errors["phone-number"].message}</>
-            )
-          }
-          {...register("phone-number", {
+        <Controller
+          control={control}
+          name="phone-number"
+          rules={{
             pattern: {
               value: PHONENUMBER_MATCH,
               message: "Please enter a valid phone number",
             },
-          })}
+          }}
+          render={({ field: { onChange }, fieldState: { error } }) => (
+            <TextField
+              id="standard-basic"
+              label="Phone Number"
+              onChange={onChange}
+              error={error}
+              helperText={error?.message}
+            />
+          )}
         />
 
         {
