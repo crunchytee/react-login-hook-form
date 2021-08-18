@@ -16,7 +16,7 @@ function LoginForm() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({mode:"onBlur"});
   const history = useHistory();
   const onSubmit = (data) => {
     console.log(data);
@@ -113,7 +113,7 @@ function LoginForm() {
               },
             })}
           />
-          {errors["phone-numberemail-address"] && (
+          {errors["phone-number"] && (
             <p>{errors["phone-number"].message}</p>
           )}
         </label>
