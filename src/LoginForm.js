@@ -16,7 +16,7 @@ function LoginForm() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({mode:"onBlur"});
+  } = useForm({ mode: "onBlur" });
   const history = useHistory();
   const onSubmit = (data) => {
     console.log(data);
@@ -96,10 +96,13 @@ function LoginForm() {
             type="password"
             {...register("confirm-password", {
               required: "Please enter a matching password",
-              validate: (value) => value === watch("password") || "Passwords must match",
+              validate: (value) =>
+                value === watch("password") || "Passwords must match",
             })}
           />
-          {errors["confirm-password"] && <p>{errors["confirm-password"].message}</p>}
+          {errors["confirm-password"] && (
+            <p>{errors["confirm-password"].message}</p>
+          )}
         </label>
         <label htmlFor="phone-number">
           Phone Number (Optional)
@@ -113,9 +116,7 @@ function LoginForm() {
               },
             })}
           />
-          {errors["phone-number"] && (
-            <p>{errors["phone-number"].message}</p>
-          )}
+          {errors["phone-number"] && <p>{errors["phone-number"].message}</p>}
         </label>
         <div>
           <button type="submit">Submit</button>
