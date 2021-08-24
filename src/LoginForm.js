@@ -25,12 +25,14 @@ function LoginForm() {
   // console.log(watch("password"))
 
   return (
-    <div className="loginForm">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="first-name" className="first-name">
+    <div className="grid place-items-center h-screen w-screen">
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"onSubmit={handleSubmit(onSubmit)}>
+        <div className="text-xl font-medium text-black p-6 block mx-36">Sign Up</div>
+        <label htmlFor="first-name" className="block text-gray-700 text-sm font-bold mb-2">
           First Name
           <input
             id="first-name"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="First Name"
             {...register("first-name", {
               required: "First name required",
@@ -40,12 +42,13 @@ function LoginForm() {
               },
             })}
           />
-          {errors["first-name"] && <p>{errors["first-name"].message}</p>}
+          {errors["first-name"] && <p className="text-red-500">{errors["first-name"].message}</p>}
         </label>
-        <label htmlFor="last-name">
+        <label htmlFor="last-name" className="block text-gray-700 text-sm font-bold mb-2">
           Last Name
           <input
             id="last-name"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Last Name"
             {...register("last-name", {
               required: "Last name required",
@@ -55,12 +58,13 @@ function LoginForm() {
               },
             })}
           />
-          {errors["last-name"] && <p>{errors["last-name"].message}</p>}
+          {errors["last-name"] && <p  className="text-red-500">{errors["last-name"].message}</p>}
         </label>
-        <label htmlFor="email-address">
+        <label htmlFor="email-address" className="block text-gray-700 text-sm font-bold mb-2">
           Email Address
           <input
             id="email-address"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Email Address"
             {...register("email-address", {
               required: "Email address required",
@@ -70,12 +74,13 @@ function LoginForm() {
               },
             })}
           />
-          {errors["email-address"] && <p>{errors["email-address"].message}</p>}
+          {errors["email-address"] && <p  className="text-red-500">{errors["email-address"].message}</p>}
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
           Password
           <input
             id="password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Password"
             type="password"
             {...register("password", {
@@ -86,12 +91,13 @@ function LoginForm() {
               },
             })}
           />
-          {errors["password"] && <p>{errors["password"].message}</p>}
+          {errors["password"] && <p  className="text-red-500">{errors["password"].message}</p>}
         </label>
-        <label htmlFor="confirm-password">
+        <label htmlFor="confirm-password" className="block text-gray-700 text-sm font-bold mb-2">
           Confirm Password
           <input
             id="confirm-password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Confirm Password"
             type="password"
             {...register("confirm-password", {
@@ -101,13 +107,14 @@ function LoginForm() {
             })}
           />
           {errors["confirm-password"] && (
-            <p>{errors["confirm-password"].message}</p>
+            <p  className="text-red-500">{errors["confirm-password"].message}</p>
           )}
         </label>
-        <label htmlFor="phone-number">
+        <label htmlFor="phone-number" className="block text-gray-700 text-sm font-bold mb-2">
           Phone Number (Optional)
           <input
             id="phone-number"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Phone Number"
             {...register("phone-number", {
               pattern: {
@@ -116,10 +123,10 @@ function LoginForm() {
               },
             })}
           />
-          {errors["phone-number"] && <p>{errors["phone-number"].message}</p>}
+          {errors["phone-number"] && <p  className="text-red-500">{errors["phone-number"].message}</p>}
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-36 my-4 rounded">Submit</button>
         </div>
       </form>
     </div>

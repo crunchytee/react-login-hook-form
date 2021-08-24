@@ -5,7 +5,7 @@ import Success from "./Success";
 
 function App() {
   return (
-    <div className="App">
+    <div className="grid place-items-center h-screen">
       <Router>
         <Switch>
           <Route path="/login">
@@ -14,7 +14,7 @@ function App() {
           <Route path="/success">
             <Success />
           </Route>
-          <Link to="/login" className="button">
+          <Link to="/login" className="w-1/3 h-1/3 text-center text-3xl bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full p-32">
             Show Form
           </Link>
         </Switch>
